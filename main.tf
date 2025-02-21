@@ -1,3 +1,4 @@
+# main.tf
 # Security Groups
 resource "aws_security_group" "alb_sg" {
   name   = "itss-ojt-DeGuzman-alb-sg"
