@@ -14,5 +14,5 @@ terraform {
 
 provider "aws" {
   region     = "ap-southeast-1"
-  AWS_ACCOUNT = "itss-devops-ojt-jenkins-svc-acct"
+ /* AWS_ACCOUNT = "itss-devops-ojt-jenkins-svc-acct"*/
 }
