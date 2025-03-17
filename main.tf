@@ -156,9 +156,9 @@ resource "aws_instance" "web" {
 
   tags = {
     Name            = "itss-ojt-DeGuzman-ec2-v2"
-    Environment     = "Sandbox"
-    backup          = "Enabled"
-    Schedule        = "Running (disable)"
+    Environment     = "Sandpbox"
+    backup          = "no"
+    Schedule        = "running (disable)"
     Patch           = "No"
     Resource_Types  = "Instances Volumes Network_Interfaces"
   }
