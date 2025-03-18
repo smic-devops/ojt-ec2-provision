@@ -4,6 +4,7 @@ resource "aws_security_group" "alb_sg" {
   name        = "itss-ojt-DeGuzman-alb-sg"
   vpc_id      = var.vpc_id
   description = "Security group for ALB"
+  subnets            = var.public_subnet_ids
 
   ingress {
     from_port   = 80
@@ -39,6 +40,7 @@ resource "aws_security_group" "ec2_sg" {
   name        = "itss-ojt-DeGuzman-ec2-sg"
   vpc_id      = var.vpc_id
   description = "Security group for EC2"
+  subnets            = var.private_subnet_ids
 
   ingress {
     from_port       = 80
@@ -65,6 +67,7 @@ resource "aws_security_group" "ec2_sg" {
 # Application Load Balancer
 resource "aws_lb" "alb" {
   name               = "itss-ojt-DeGuzman-alb"
+  vpc_id             = var.vpc_id
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
@@ -137,6 +140,7 @@ resource "aws_lb_listener" "listener_https" {
 # EC2 Instance
 resource "aws_instance" "web" {
   ami             = "ami-039454f12c36e7620"  # Replace with a valid AMI ID
+  vpc_id          = var.vpc_id
   instance_type   = var.instance_type
   subnet_id       = var.private_subnet_ids[0]
   security_groups = [aws_security_group.ec2_sg.id]
