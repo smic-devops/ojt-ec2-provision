@@ -158,7 +158,7 @@ resource "aws_instance" "web" {
     Name            = "itss-ojt-DeGuzman-ec2-v2"
     Environment     = "Sandbox"
     backup          = "no"
-    Schedule        = "running (disable)"
+    Schedule        = "running"
     Patch           = "No"
     Resource_Types  = "Instances Volumes Network_Interfaces"
   }
