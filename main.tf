@@ -137,7 +137,6 @@ resource "aws_lb_listener" "listener_https" {
 # EC2 Instance
 resource "aws_instance" "web" {
   ami             = "ami-039454f12c36e7620"  # Replace with a valid AMI ID
-  vpc_id          = var.vpc_id
   instance_type   = var.instance_type
   subnet_id       = var.private_subnet_ids[0]
   security_groups = [aws_security_group.ec2_sg.id]
