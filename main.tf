@@ -4,7 +4,6 @@ resource "aws_security_group" "alb_sg" {
   name        = "itss-ojt-DeGuzman-alb-sg"
   vpc_id      = var.vpc_id
   description = "Security group for ALB"
-  
 
   ingress {
     from_port   = 80
@@ -40,7 +39,6 @@ resource "aws_security_group" "ec2_sg" {
   name        = "itss-ojt-DeGuzman-ec2-sg"
   vpc_id      = var.vpc_id
   description = "Security group for EC2"
-  subnets            = var.private_subnet_ids
 
   ingress {
     from_port       = 80
@@ -67,7 +65,6 @@ resource "aws_security_group" "ec2_sg" {
 # Application Load Balancer
 resource "aws_lb" "alb" {
   name               = "itss-ojt-DeGuzman-alb"
-  vpc_id             = var.vpc_id
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
