@@ -4,7 +4,7 @@ resource "aws_security_group" "alb_sg" {
   name        = "itss-ojt-DeGuzman-alb-sg"
   vpc_id      = var.vpc_id
   description = "Security group for ALB"
-  subnets            = var.public_subnet_ids
+  
 
   ingress {
     from_port   = 80
