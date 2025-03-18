@@ -156,7 +156,7 @@ resource "aws_instance" "web" {
 
   tags = {
     Name            = "itss-ojt-DeGuzman-ec2-v2"
-    Environment     = "Sandpbox"
+    Environment     = "Sandbox"
     backup          = "no"
     Schedule        = "running (disable)"
     Patch           = "No"
