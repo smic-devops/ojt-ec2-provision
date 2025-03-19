@@ -127,10 +127,10 @@ resource "aws_instance" "web" {
     http_tokens = "required"
   }
 
-  lifecycle {
+/*  lifecycle {
     prevent_destroy        = true
     create_before_destroy  = true
-  }
+  }*/
 
   tags = {
     Name            = "itss-ojt-DeGuzman-ec2-v2"
