@@ -1,4 +1,3 @@
-# main.tf
 # Security Groups
 resource "aws_security_group" "alb_sg" {
   name        = "itss-ojt-DeGuzman-alb-sg"
@@ -114,7 +113,7 @@ resource "aws_lb_listener" "listener" {
   }
 }
 
-/*# ALB HTTPS Listener
+# ALB HTTPS Listener
 resource "aws_lb_listener" "listener_https" {
   load_balancer_arn = aws_lb.alb.arn
   port              = 443
@@ -132,7 +131,7 @@ resource "aws_lb_listener" "listener_https" {
     Environment    = "Sandbox"
     Resource_Types = "Instances Volumes Network_Interfaces"
   }
-}*/
+}
 
 # EC2 Instance
 resource "aws_instance" "web" {
