@@ -9,7 +9,8 @@ resource "aws_security_group" "alb_sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["192.168.1.0/24"] # Replace with your specific IP range
+    security_groups = ["sg-0d9957788ade33836"]
+//    cidr_blocks = ["192.168.1.0/24"] # Replace with your specific IP range
     description = "Allow HTTP traffic from specific IP range"
   }
 
@@ -17,7 +18,7 @@ resource "aws_security_group" "alb_sg" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    security_groups = "sg-0d9957788ade33836"
+    security_groups = ["sg-0d9957788ade33836"]
 //    cidr_blocks = ["sg-0d9957788ade33836"] # Replace with your specific IP range
     description = "Allow HTTPS traffic from specific IP range"
   }
@@ -26,7 +27,7 @@ resource "aws_security_group" "alb_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    security_groups = "sg-0d9957788ade33836"
+    security_groups = ["sg-0d9957788ade33836"]
 //    cidr_blocks = ["sg-0d9957788ade33836"] # Restrict egress traffic
     description = "Allow all outbound traffic to specific IP range"
   }
