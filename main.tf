@@ -1,3 +1,4 @@
+# main.tf
 # Security Groups
 resource "aws_security_group" "alb_sg" {
   name        = "itss-ojt-DeGuzman-alb-sg"
@@ -96,31 +97,6 @@ resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_lb.alb.arn
   port              = 80
   protocol          = "HTTP"
-
-  default_action {
-    type = "redirect"
-
-    redirect {
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-
-  tags = {
-    Environment    = "Sandbox"
-    Resource_Types = "Instances Volumes Network_Interfaces"
-  }
-}
-
-# ALB HTTPS Listener
-resource "aws_lb_listener" "listener_https" {
-  load_balancer_arn = aws_lb.alb.arn
-  port              = 443
-  protocol          = "HTTPS"
-
-  ssl_policy      = "ELBSecurityPolicy-2016-08"
-  certificate_arn = var.certificate_arn
 
   default_action {
     type             = "forward"
