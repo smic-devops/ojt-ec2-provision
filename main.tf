@@ -27,7 +27,8 @@ resource "aws_security_group" "alb_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"] # Replace with your specific IP range
+    description = "Restrict egress traffic to specific IP range"
   }
 
   tags = {
@@ -66,7 +67,7 @@ resource "aws_security_group" "ec2_sg" {
 # Application Load Balancer
 resource "aws_lb" "alb" {
   name               = "itss-ojt-DeGuzman-alb"
-  internal           = false
+  internal           = true
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
   subnets            = var.public_subnet_ids
@@ -112,6 +113,7 @@ resource "aws_lb_listener" "listener" {
 
 # EC2 Instance
 resource "aws_instance" "web" {
+  disable_api_termination = true
   ami             = "ami-039454f12c36e7620"  # Replace with a valid AMI ID
   instance_type   = var.instance_type
   subnet_id       = var.private_subnet_ids[0]
