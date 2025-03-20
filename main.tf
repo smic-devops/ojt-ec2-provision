@@ -113,7 +113,6 @@ resource "aws_lb_listener" "listener" {
 
 # EC2 Instance
 resource "aws_instance" "web" {
-  disable_api_termination = true
   ami             = "ami-039454f12c36e7620"  # Replace with a valid AMI ID
   instance_type   = var.instance_type
   subnet_id       = var.private_subnet_ids[0]
