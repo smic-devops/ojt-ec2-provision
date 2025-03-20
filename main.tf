@@ -9,7 +9,8 @@ resource "aws_security_group" "alb_sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["192.168.1.0/24"] # Replace with your specific IP range
+    security_groups = ["sg-0d9957788ade33836"]
+//    cidr_blocks = ["192.168.1.0/24"] # Replace with your specific IP range
     description = "Allow HTTP traffic from specific IP range"
   }
 
@@ -17,7 +18,8 @@ resource "aws_security_group" "alb_sg" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["192.168.1.0/24"] # Replace with your specific IP range
+    security_groups = ["sg-0d9957788ade33836"]
+//    cidr_blocks = ["192.168.1.0/24"] # Replace with your specific IP range
     description = "Allow HTTPS traffic from specific IP range"
   }
 
@@ -25,8 +27,8 @@ resource "aws_security_group" "alb_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"] # Allow outbound traffic to any destination
-    description = "Allow all outbound traffic"
+    cidr_blocks = ["192.168.1.0/24"] # Replace with your specific IP range
+    description = "Restrict egress traffic to specific IP range"
   }
 
   tags = {
@@ -52,8 +54,8 @@ resource "aws_security_group" "ec2_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"] # Allow outbound traffic to any destination
-    description = "Allow all outbound traffic"
+    cidr_blocks = ["192.168.1.0/24"] # Restrict egress traffic
+    description = "Allow all outbound traffic to specific IP range"
   }
 
   tags = {
@@ -70,7 +72,7 @@ resource "aws_lb" "alb" {
   security_groups    = [aws_security_group.alb_sg.id]
   subnets            = var.public_subnet_ids
 
-//  enable_deletion_protection = false # Disable deletion protection for easier management
+  enable_deletion_protection = true
   drop_invalid_header_fields = true
 
   tags = {
@@ -125,9 +127,10 @@ resource "aws_instance" "web" {
     http_tokens = "required"
   }
 
-  lifecycle {
+/*  lifecycle {
+    prevent_destroy        = true
     create_before_destroy  = true
-  }
+  }*/
 
   tags = {
     Name            = "itss-ojt-DeGuzman-ec2-v2"
